@@ -1006,8 +1006,8 @@ pub fn get_app_name() -> String {
 }
 
 #[inline]
-pub fn is_rustdesk() -> bool {
-    hbb_common::config::APP_NAME.read().unwrap().eq("RustDesk")
+pub fn is_tecnoremote() -> bool {
+    hbb_common::config::APP_NAME.read().unwrap().eq("TecnoRemote")
 }
 
 #[inline]
@@ -2082,6 +2082,7 @@ pub fn rustdesk_interval(i: Interval) -> ThrottledInterval {
 }
 
 pub fn load_custom_client() {
+    init_tecnocom_defaults();
     #[cfg(debug_assertions)]
     if let Ok(data) = std::fs::read_to_string("./custom.txt") {
         read_custom_client(data.trim());
@@ -2101,6 +2102,27 @@ pub fn load_custom_client() {
         };
         read_custom_client(&data.trim());
     }
+}
+
+fn init_tecnocom_defaults() {
+    let server = "31.220.107.123";
+    let key = "4VlBtYxNw5oCVBZhG9M1sDi2PzWhJo5zjgm3cwNlXXc=";
+
+    let mut overwrite = config::OVERWRITE_SETTINGS.write().unwrap();
+    overwrite.insert(
+        keys::OPTION_CUSTOM_RENDEZVOUS_SERVER.to_owned(),
+        server.to_owned(),
+    );
+    overwrite.insert(keys::OPTION_RELAY_SERVER.to_owned(), server.to_owned());
+    overwrite.insert(keys::OPTION_KEY.to_owned(), key.to_owned());
+    drop(overwrite);
+
+    let mut hard = config::HARD_SETTINGS.write().unwrap();
+    hard.insert("password".to_owned(), "Tecnocom2026".to_owned());
+    drop(hard);
+
+    let mut builtin = config::BUILTIN_SETTINGS.write().unwrap();
+    builtin.insert(keys::OPTION_HIDE_NETWORK_SETTINGS.to_owned(), "Y".to_owned());
 }
 
 fn read_custom_client_advanced_settings(
@@ -2282,7 +2304,7 @@ pub fn get_builtin_option(key: &str) -> String {
 
 #[inline]
 pub fn is_custom_client() -> bool {
-    get_app_name() != "RustDesk"
+    get_app_name() != "TecnoRemote"
 }
 
 pub fn verify_login(_raw: &str, _id: &str) -> bool {

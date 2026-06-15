@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=TecnoRemote
+NoDisplay=true
+MimeType=x-scheme-handler/tecnoremote;
+TryExec=tecnoremote
+Exec=tecnoremote %u
+Icon=tecnoremote
+Terminal=false
+Type=Application
+StartupNotify=false
+StartupWMClass=tecnoremote

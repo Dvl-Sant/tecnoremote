@@ -408,14 +408,14 @@ def build_flutter_dmg(version, features):
             f'MACOSX_DEPLOYMENT_TARGET=10.14 cargo build --locked --features {features} --release')
     # copy dylib
     system2(
-        "cp target/release/liblibrustdesk.dylib target/release/librustdesk.dylib")
+        "cp target/release/liblibtecnoremote.dylib target/release/libtecnoremote.dylib")
     os.chdir('flutter')
     system2('flutter build macos --release')
-    system2('cp -rf ../target/release/service ./build/macos/Build/Products/Release/RustDesk.app/Contents/MacOS/')
+    system2('cp -rf ../target/release/service ./build/macos/Build/Products/Release/TecnoRemote.app/Contents/MacOS/')
     '''
     system2(
-        "create-dmg --volname \"RustDesk Installer\" --window-pos 200 120 --window-size 800 400 --icon-size 100 --app-drop-link 600 185 --icon RustDesk.app 200 190 --hide-extension RustDesk.app rustdesk.dmg ./build/macos/Build/Products/Release/RustDesk.app")
-    os.rename("rustdesk.dmg", f"../rustdesk-{version}.dmg")
+        "create-dmg --volname \"TecnoRemote Installer\" --window-pos 200 120 --window-size 800 400 --icon-size 100 --app-drop-link 600 185 --icon TecnoRemote.app 200 190 --hide-extension TecnoRemote.app tecnoremote.dmg ./build/macos/Build/Products/Release/TecnoRemote.app")
+    os.rename("tecnoremote.dmg", f"../tecnoremote-{version}.dmg")
     '''
     os.chdir("..")
 
@@ -426,7 +426,7 @@ def build_flutter_arch_manjaro(version, features):
     ffi_bindgen_function_refactor()
     os.chdir('flutter')
     system2('flutter build linux --release')
-    system2(f'strip {flutter_build_dir}/lib/librustdesk.so')
+    system2(f'strip {flutter_build_dir}/lib/libtecnoremote.so')
     os.chdir('../res')
     system2('HBB=`pwd`/.. FLUTTER=1 makepkg -f')
 
@@ -434,7 +434,7 @@ def build_flutter_arch_manjaro(version, features):
 def build_flutter_windows(version, features, skip_portable_pack):
     if not skip_cargo:
         system2(f'cargo build --locked --features {features} --lib --release')
-        if not os.path.exists("target/release/librustdesk.dll"):
+        if not os.path.exists("target/release/libtecnoremote.dll"):
             print("cargo build failed, please check rust source code.")
             exit(-1)
     os.chdir('flutter')

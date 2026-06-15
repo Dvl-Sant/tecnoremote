@@ -1,4 +1,4 @@
-use librustdesk::*;
+use libtecnoremote::*;
 
 #[cfg(not(target_os = "macos"))]
 fn main() {}
