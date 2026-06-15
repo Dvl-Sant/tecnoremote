@@ -285,8 +285,11 @@ echo "[5/5] Construyendo paquete .deb..."
 find "$PKG_DIR" -type d -exec chmod 755 {} \;
 chmod 755 "$PKG_DIR/DEBIAN/postinst" "$PKG_DIR/DEBIAN/prerm" "$PKG_DIR/DEBIAN/postrm"
 
+# Asegurar owner root en todos los archivos del paquete
+sudo chown -R root:root "$PKG_DIR"
+
 # dpkg-deb
-dpkg-deb --build --root-owner-flag "$PKG_DIR" "$DEB_FILE"
+dpkg-deb --build "$PKG_DIR" "$DEB_FILE"
 
 echo ""
 echo "========================================"
