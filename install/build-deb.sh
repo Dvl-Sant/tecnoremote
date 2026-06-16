@@ -55,7 +55,7 @@ Version: $APP_VERSION
 Section: net
 Priority: optional
 Architecture: amd64
-Depends: libgtk-3-0, libssl3, libpam0g, libpulse0, libayatana-appindicator3-1, libxcb1, libxdo4, libx11-6, libxcb-randr0, libxcb-shape0, libxcb-xfixes0, libdbus-1-3, xserver-xorg-video-dummy
+Depends: libgtk-3-0, libssl3, libpam0g, libpulse0, libayatana-appindicator3-1, libxcb1, libxdo3, libx11-6, libxcb-randr0, libxcb-shape0, libxcb-xfixes0, libdbus-1-3, xserver-xorg-video-dummy
 Recommends: pulseaudio-utils
 Maintainer: $MAINTAINER
 Description: $DESCRIPTION
